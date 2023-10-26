@@ -1,0 +1,11 @@
+EXEC sp_resetstatus [db-name];
+
+ALTER DATABASE [db-name] SET emergency;
+
+DBCC CHECKDB ([db-name]);
+
+ALTER DATABASE [db-name] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+
+DBCC CHECKDB ([db-name],REPAIR_ALLOW_DATA_LOSS);
+
+ALTER DATABASE [db-name] SET MULTI_USER;
